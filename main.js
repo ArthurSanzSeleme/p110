@@ -1,82 +1,77 @@
 
-predicition1 ="";
-predicition2 ="";
+  Webcam.set({
+    width:350,
+    height:300,
+    image_format : 'png',
+    png_quality:90
+  });
 
+  camera = document.getElementById("camera");
 
-Webcam.set({
-width:350,
-height:300,
-imageFormat : 'png',
-pngQuality:90
-});
+Webcam.attach( '#camera' );
 
-camera = document.getElementById("camera");
-
-Webcam.attach('#camera');
-
-function takeSnapshot(){
-   Webcam.snap(function(data_uri){
-    document.getElementById("result").innerHTML = '<img id="capture_image" src="'+data_uri+'"/>';
-   }) 
-}
-console.log('ml5 version:', ml5.version);
-
-classifier = ml5.imageClassifier('https://teachablemachine.withgoogle.com/models/bgKVNWlaH/model.json',modelLoaded);
-
-function modelLoaded() {
-  console.log('Model Loaded!');
-}
-
-function speak(){
-var synth = window.speechSynthesis;
-speakData1 = "A primeira previsão é " + prediction1;
-speakData2 = "E a segunda previsão é " + prediction2;
-var utterThis = new SpeechSynthesisUtterance(speakData1 + speakData2);
-synth.speak(utterThis);
-}
-
-
-function check()
+      
+function take_snapshot()
 {
-  img = document.getElementById('captured_image');
-  classifier.classify(img, gotResult);
+    Webcam.snap(function(data_uri) {
+        document.getElementById("result").innerHTML = '<img id="captured_image" src="'+data_uri+'"/>';
+    });
 }
 
+  console.log('ml5 version:', ml5.version);
+  
+classifier = ml5.imageClassifier('https://teachablemachine.withgoogle.com/models/HAyrcwhmE/model.json',modelLoaded);
+
+  function modelLoaded() {
+    console.log('Model Loaded!');
+  }
+      
+  function check()
+  {
+    img = document.getElementById('captured_image');
+    classifier.classify(img, gotResult);
+  }
 
 function gotResult(error, results) {
-if (error) {
-  console.error(error);
-} else {
-  console.log(results);
-  document.getElementById("resultEmotionName").innerHTML = results[0].label;
-  document.getElementById("resultEmotionName2").innerHTML = results[1].label;
-  prediction1 = results[0].label;
-  prediction2 = results[1].label;
-  speak();
-  if(results[0].label == "feliz")
-  {
-    document.getElementById("updateEmoji").innerHTML = "&#128522;";
-  }
-  if(results[0].label == "triste")
-  {
-    document.getElementById("updateEmoji").innerHTML = "&#128532;";
-  }
-  if(results[0].label == "irritado")
-  {
-    document.getElementById("updateEmoji").innerHTML = "&#128548;";
-  }
+  if (error) {
+    console.error(error);
+  } else {
+    console.log(results);
+    
+    document.getElementById("result_object_name").innerHTML = results[0].label;
 
-  if(results[1].label == "feliz")
-  {
-    document.getElementById("updateEmoji2").innerHTML = "&#128522;";
-  }
-  if(results[1].label == "triste")
-  {
-    document.getElementById("updateEmoji2").innerHTML = "&#128532;";
-  }
-  if(results[1].label == "irritado")
-  {
-    document.getElementById("updateEmoji2").innerHTML = "&#128548;";
+    gesture = results[0].label;
+    
+    toSpeak = "";
+    
+    if(gesture == "tranquilo")
+    {
+      toSpeak = "Isso parece tranquilo!";
+      document.getElementById("result_object_gesture_icon").innerHTML = "&#128076;";
+    }
+    else if(gesture == "legal")
+    {
+      toSpeak = "Muito legal!";
+      document.getElementById("result_object_gesture_icon").innerHTML = "&#128077;";
+    }
+    else if(gesture == "vitória")
+    {
+      toSpeak = "Vitória maravilhosa!";
+      document.getElementById("result_object_gesture_icon").innerHTML = "&#9996;";
+    }
+
+    speak();
   }
 }
+
+
+function speak(){
+    var synth = window.speechSynthesis;
+
+    speak_data = toSpeak;
+
+    var utterThis = new SpeechSynthesisUtterance(speak_data);
+
+    synth.speak(utterThis);
+
 }

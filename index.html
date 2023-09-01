@@ -1,7 +1,7 @@
  
 <html>
     <head>
-      <title>Emoção em</title>
+      <title>App Web de Gestos</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -17,53 +17,51 @@
     <div class="container">
     
       <center>
-        <h3 class="btn btn-warning heading">APP EMOÇÃO EM EMOJI</h3>
+        <h3 class="btn btn-info heading">APP WEB DE GESTOS COM AS MÃOS
         <br>
+        <span>&#129305;</span>
         <span>&#128077;</span>
-        <span>&#9996;&#65039;</span>
-        <span>&#128076;</span>
-        <span>&#129776;</span>
+        <span>&#9996;</span>
+        <span>&#9994;</span>
+        <span>&#128079;</span>
         <span>&#129304;</span>
-        <span>&#129310;</span>
+        </h3>
+  
         <br><br>
   
-        <p style="font-size: 22px;">Tire sua selfie para gerar o emoji
-            <br>
-          <b style="color: yellow">Emoji de boa</b>
-          <br>
-          <b style="color: black">Emoji metalero</b>
-          <br>
-          <b style="color: red">Emoji K poper</b>
-          <br>
+        <p style="font-size: 22px;">Tire uma foto de um gesto para saber seu significado</p>
+        <p style="font-size: 18px;">O modelo está treinado nos seguintes gestos: </p>
+        <p style="font-size: 30px;">
+          &#129305; | &#128077; | &#9996;
         </p>
+  
         <div class="col-md-4 col-sm-12 col-xs-12">
-        <div id="camera"></div>
-        <br><br>
-        <button onclick="takeSnapshot();" class="btn btn-warning">Capturar Imagem</button>
-      </div>
+          <label>Visualização da webcam: </label>
+          <div id="camera"></div>
+          <br><br>
+          <button onclick="take_snapshot();" class="btn btn-primary">Capturar Imagem</button>
+        </div>
   
-      <div class="col-md-4 col-sm-12 col-xs-12">
-        <label>previsão 1:</label>
-        <p class="emotionName" id="resultEMotionName"></p>
-        <p class="emoji" id="updateEmoji"></p>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <label>Previsão: </label>
+          <p class="object_name" id="result_object_name"></p>
+          <p class="gesture_icon" id="result_object_gesture_icon"></p>
+        </div>
   
-        <label>previsão 2:</label>
-        <p class="emotionName" id="resultEMotionName2"></p>
-        <p class="emoji" id="updateEmoji2"></p>
-      </div>
-  
-  
-      <div class="col-md-4 col-sm-12 col-xs-12">
-        <label>Foto:</label>
-        <div id="result"></div>
-        <br><br>
-        <button onclick="check();" class="btn btn-success"> Prever Emoção</button>
-  
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <label>Foto:</label>
+          <div id="result"></div>
+          <br><br>
+          <button onclick="check();" class="btn btn-success">Prever Gesto da Mão</button>
+         </div>
   
       </center>
   
+    </div>
   
   <script src="main.js"></script>
   
     </body>
   </html>
+  
+   
